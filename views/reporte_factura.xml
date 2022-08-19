@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="reporte_factura">
+        <t t-call="web.html_container">
+            <t t-set="data_report_margin_top" t-value="10"/>
+            <t t-set="data_report_header_spacing" t-value="5"/>
+            <t t-foreach="docs" t-as="o">
+                <div class="article" style="font-size:14px">
+                  <header>
+                      <div style='float:left'>
+                          <br/>
+                          <img t-if="o.company_id.logo" t-att-src="'data:image/png;base64,%s' % to_text(o.company_id.logo)" style="width:220px"/>
+                      </div>
+                      <div style='float:right;text-align:center;color:black;width:250px'>
+                          <br/>
+                          DOCUMENTO TRIBUTARIO ELECTRONICO<br/>
+                          <table style="margin: 0px auto;width:100%;height:100px">
+                              <tr style="background-color:black;color:white;border-top: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black">
+                                  <td>FACTURA CAMBIARIA <span t-field="o.name"/></td>
+                              </tr>
+                              <tr style="background-color:black;color:white;border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black">
+                                  <td>General</td>
+                              </tr>
+                              <tr style="border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black">
+                                  <td>
+                                      Serie: <span t-esc="o.feel_serie"/><br/>
+                                      No: <span t-esc="o.feel_numero"/><br/>
+                                  </td>
+                              </tr>
+                          </table>
+
+                          <!-- <span t-esc="o.journal_id.tipo_dte_fel.upper()"/> -->
+
+                      </div>
+                      <br/>
+                      <div style="margin: 0 auto; width: 350px; text-align: center">
+                          <span t-field="o.company_id.name"/><br/>
+                          <span t-field="o.journal_id.feel_nombre_comercial"/><br/>
+                          <span t-field="o.journal_id.direccion_sucursal"/><br/>
+                          <strong>NIT: <span t-field="o.company_id.vat"/><br/></strong>
+                          Tel: <span t-field="o.company_id.phone"/> <br/>
+                          <span t-field="o.company_id.email"/>
+
+                      </div>
+                      <!-- <div style="clear:both"/> -->
+                      <div style="clear:both"/>
+                    </header>
+                    <div style="clear:both"/>
+                    <div class="page">
+
+                      <div style="height:25px"/>
+
+                      <div class="info1">
+                          <div class="izquierda" style="float:left;">
+
+                            <table style="margin: 0px auto;width:500px">
+                                <tr style="background-color:black;color:white;border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                    <td style="text-align:center; vertical-align: middle;">Detalle del Documento</td>
+                                </tr>
+                                <tr>
+                                    <td style="border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                        <strong>Forma de Pago: </strong>Crédito<br/>
+                                        <strong>Plazo:</strong> <span t-field="o.invoice_payment_term_id.name"/><br/>
+                                        <strong>Moneda:</strong> <span t-field="o.currency_id.name"/><br/>
+                                        <strong>Fecha de Emisión:</strong> <span t-field="o.invoice_date"/><br/>
+                                        <strong>Fecha de Vencimiento:</strong> <span t-field="o.invoice_date_due"/><br/>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                          </div>
+                          <div class="derecha" style="float:right;">
+                            <table style="margin: 0px auto;width:300px;">
+                                <tr style="border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                    <td style="text-align:center; vertical-align: middle;background-color:black;color:white">DIA</td>
+                                    <td style="text-align:center; vertical-align: middle;background-color:black;color:white">MES</td>
+                                    <td style="text-align:center; vertical-align: middle;background-color:black;color:white">AÑO</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                    <td style="text-align:center; vertical-align: middle;">
+                                        <span t-esc="o.invoice_date.day"/>
+                                    </td>
+                                    <td style="text-align:center; vertical-align: middle;">
+                                        <span t-esc="mes_a_letras(o.invoice_date.month)"/>
+                                    </td>
+                                    <td style="text-align:center; vertical-align: middle;">
+                                        <span t-esc="o.invoice_date.year"/>
+                                    </td>
+                                </tr>
+                            </table>
+                          </div>
+                          <div class="clearfix"/>
+                      </div>
+
+                      <div style="height:25px"/>
+
+                      <div class="info2">
+                          <table style="margin: 0px auto;width:100%;">
+                              <tr style="border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                  <td><strong>Nombre Receptor:</strong> <span t-field="o.partner_id.name"/></td>
+                                  <td><strong>NIT: </strong><span t-field="o.partner_id.vat"/></td>
+                              </tr>
+                              <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                                  <td><strong>Teléfono: </strong><span t-field="o.partner_id.phone"/></td>
+                                  <td><strong>Email: </strong><span t-field="o.partner_id.email"/></td>
+                              </tr>
+                              <tr style="border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;border-top: 1px solid black;">
+                                  <td colspan="2"><strong>Dirección:</strong> <span t-field="o.partner_id.street"/> <span t-field="o.partner_id.street"/></td>
+                              </tr>
+                          </table>
+                      </div>
+                      <div style="height:50px"/>
+
+                      <div class="info3">
+                          <table class="table table-condensed">
+                              <tr style="border-bottom: 1px solid black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                  <th style="background-color:black;color:white;border-right: 1px solid black;text-align:center; vertical-align: middle;">CANTIDAD</th>
+                                  <th style="background-color:black;color:white;border-right: 1px solid black;text-align:center; vertical-align: middle;">COD</th>
+                                  <th style="background-color:black;color:white;border-right: 1px solid black;text-align:center; vertical-align: middle;">B/S</th>
+                                  <th style="background-color:black;color:white;border-right: 1px solid black;text-align:center; vertical-align: middle;">DESCRIPCIÓN</th>
+                                  <th style="background-color:black;color:white;border-right: 1px solid black;text-align:center; vertical-align: middle;">P.UNIT</th>
+                                  <th style="background-color:black;color:white;border-right: 1px solid black;text-align:center; vertical-align: middle;">DESC</th>
+                                  <th style="background-color:black;color:white;border-right: 1px solid black;text-align:center; vertical-align: middle;">IMPUESTOS</th>
+                                  <th style="background-color:black;color:white;border-right: 1px solid black;text-align:center; vertical-align: middle;">TOTAL</th>
+                              </tr>
+
+                                  <tr t-foreach="o.invoice_line_ids" t-as="l" style="border-right: 1px solid black;">
+                                      <td style="text-align:center; vertical-align: middle;;border-right: 1px solid black;border-left: 1px solid black;border-bottom: 1px solid black;">
+                                          <span t-field="l.quantity"/>
+                                      </td>
+                                      <td style="text-align:center; vertical-align: middle;border-bottom: 1px solid black;border-right: 1px solid black;">
+                                          <span t-field="l.product_id.default_code"/>
+                                      </td>
+                                      <td style="text-align:center; vertical-align: middle;;border-right: 1px solid black;border-bottom: 1px solid black;">
+                                          <t t-if="l.product_id.type == 'product'">
+                                              B
+                                          </t>
+                                          <t t-else="">
+                                              S
+                                          </t>
+                                      </td>
+                                      <td style="text-align:center; vertical-align: middle;border-right: 1px solid black;border-bottom: 1px solid black;">
+                                          <span t-field="l.name"/>
+                                      </td>
+                                      <td style="text-align:center; vertical-align: middle;border-right: 1px solid black;border-bottom: 1px solid black;">
+                                          <span t-field="l.price_unit" t-options="{'widget': 'float', 'precision': 2}"/>
+                                      </td>
+                                      <td style="text-align:center; vertical-align: middle;border-right: 1px solid black;border-bottom: 1px solid black;">
+                                          <span t-field="l.discount" t-options="{'widget': 'float', 'precision': 2}"/>
+                                      </td>
+                                      <td style="text-align:center; vertical-align: middle;border-right: 1px solid black;border-bottom: 1px solid black;">
+                                          <span t-esc="l.price_total - l.price_subtotal" t-options="{'widget': 'float', 'precision': 2}"/>
+                                      </td>
+                                      <td style="text-align:center; vertical-align: middle;border-right: 1px solid black;border-bottom: 1px solid black;">
+                                          <span t-esc="l.price_total" t-options="{'widget': 'float', 'precision': 2}"/>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="6" style="border-right: 1px solid black;border-left: 1px solid black;border-bottom: 1px solid black;vertical-align: middle;">TOTAL EN LETRAS: <br/><span t-esc="c_letras(o.amount_total)"/></td>
+                                      <td style="border-right: 1px solid black;border-bottom: 1px solid black;text-align:center; vertical-align: middle;">TOTAL:</td>
+                                      <td style="border-right: 1px solid black;border-bottom: 1px solid black;text-align:center; vertical-align: middle;"><span t-field="o.amount_total"/></td>
+                                  </tr>
+                                  <tr style="vertical-align: middle;border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
+                                      <td colspan="8">NUMERO DE AUTORIZACIÓN: <span t-field="o.feel_numero_autorizacion"/></td>
+                                  </tr>
+                                  <tr style=" vertical-align: middle;border-right: 1px solid black;border-left: 1px solid black;border-bottom: 1px solid black;">
+                                      <td colspan="8">FECHA DE CERTIFICACIÓN: <span t-field="o.invoice_date"/></td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="6" style="vertical-align: middle;border-left: 1px solid black;border-bottom: 1px solid black;">
+                                        Frase de retención del ISR - Sujeto a pagos trimestrales ISR - Puedes realizar tu pago o transferencias a las<br/>
+                                        siguientes cuentas:<br/>
+                                        <strong>Cuentas Bancarias:</strong><br/>
+                                        <strong>Cuenta Monetaria</strong> Banco Industrial 1859201450 ( <strong>Quetzales</strong> )<br/>
+                                        <strong>Cuenta Monetaria</strong> Banrural 3347035905 ( <strong>Quetzales</strong> )
+
+
+
+
+                                      </td>
+                                      <td style="border-bottom: 1px solid black;">
+                                        <!-- <div class="barcode">
+                                            <center><img alt="Barcode" t-att-src="'/report/barcode/?type=QR&amp;value=%s&amp;width=180&amp;height=180'
+                                              % quote_plus('https://felgtaws.digifact.com.gt/guest/api/FEL?' + keep_query(DATA=o.company_id.vat)+'%7C'+o.feel_numero_autorizacion +'%7CGUESTUSERQR')
+                                              "/></center>
+                                        </div> -->
+                                      </td>
+                                      <td style="border-right: 1px solid black;border-bottom: 1px solid black;">
+                                        <t t-if="o.company_id.feel_logo">
+                                            <div style="page-break-inside: avoid;">
+                                              <img t-att-src="'data:image/png;base64,%s' % to_text(o.company_id.feel_logo)"  class="border border-black" style="height: 60px; width: 80px;"/>
+                                              <t t-if="o.company_id.feel_texto_logo">
+                                                  <span t-esc="o.company_id.feel_texto_logo"/>
+                                              </t>
+                                            </div>
+                                        </t>
+
+                                      </td>
+                                  </tr>
+                          </table>
+
+                          <p>
+                            Somos una empresa de manufactura y venta de playeras, blusas y sudaderos deferente al resto, que no tiene miedo de innovar y que busca hacerse notar.
+                            Certificador: DIGIFACT, S.A. Nit: 50510231
+                            Representación Impresa de la Factura Electrónica por Factoa. https://factoa.gt
+                          </p>
+                      </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

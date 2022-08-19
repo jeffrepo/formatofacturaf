@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            id="formatofacturaf_factura"
+            string="Factura fel"
+            model="account.move"
+            report_type="qweb-pdf"
+            file="formatofacturaf.reporte_factura"
+            name="formatofacturaf.reporte_factura"
+        />
+
+    </data>
+</odoo>
