@@ -180,11 +180,11 @@
 
                                       </td>
                                       <td style="border-bottom: 1px solid black;">
-                                        <!-- <div class="barcode">
+                                        <div class="barcode">
                                             <center><img alt="Barcode" t-att-src="'/report/barcode/?type=QR&amp;value=%s&amp;width=180&amp;height=180'
                                               % quote_plus('https://felgtaws.digifact.com.gt/guest/api/FEL?' + keep_query(DATA=o.company_id.vat)+'%7C'+o.feel_numero_autorizacion +'%7CGUESTUSERQR')
                                               "/></center>
-                                        </div> -->
+                                        </div>
                                       </td>
                                       <td style="border-right: 1px solid black;border-bottom: 1px solid black;">
                                         <t t-if="o.company_id.feel_logo">
@@ -202,7 +202,7 @@
 
                           <p>
                             Somos una empresa de manufactura y venta de playeras, blusas y sudaderos deferente al resto, que no tiene miedo de innovar y que busca hacerse notar.
-                            Certificador: DIGIFACT, S.A. Nit: 50510231
+                            Certificador: DIGIFACT, S.A. Nit: <span t-field="o.company_id.nit_digifactfel"/>
                             Representación Impresa de la Factura Electrónica por Factoa. https://factoa.gt
                           </p>
                       </div>
