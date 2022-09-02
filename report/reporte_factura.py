@@ -146,7 +146,7 @@ class ReporteFactura(models.AbstractModel):
             11: 'DICIEMBRE',
         }
 
-        return en_letras[mes]
+        return en_letras[mes-1]
 
 
     def fecha_vencimiento(self, o):
